@@ -11,6 +11,8 @@ declare(strict_types=1);
 namespace Golf;
 
 use Golf\Controller\GolfController;
+use Golf\Controller\WriteController;
+use Golf\Factory\WriteControllerFactory;
 use Laminas\Router\Http\Literal;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
@@ -20,10 +22,20 @@ return [
             'home' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route' => '/golf',
+                    'route' => '/',
                     'defaults' => [
                         'controller' => GolfController::class,
                         'action' => 'index',
+                    ],
+                ],
+            ],
+            "add" => [
+                "type" => Literal::class,
+                "options" => [
+                    "route" => "/add",
+                    "defaults" => [
+                        "controller" => WriteController::class,
+                        "action" => "add",
                     ],
                 ],
             ],
@@ -32,6 +44,8 @@ return [
     'controllers' => [
         'factories' => [
             GolfController::class => InvokableFactory::class,
+            WriteController::class => WriteControllerFactory::class,
+            Model\PostCommand::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
@@ -39,7 +53,7 @@ return [
         'display_exceptions' => true,
         'doctype' => 'HTML5',
         'template_map' => [
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',

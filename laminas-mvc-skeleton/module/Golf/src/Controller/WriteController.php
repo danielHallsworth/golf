@@ -21,23 +21,7 @@ class WriteController extends AbstractActionController
 
     public function addAction()
     {
-        $request = $this->getRequest();
-        $viewModel = new ViewModel(["form" => $this->form]);
-
-        if (!$request->isPost()) {
-            return $viewModel;
-        }
-
-        $this->form->setData($request->getPost());
-
-        if (! $this->form->isValid()){
-            return $viewModel;
-        }
-
-        $data = $this->form->getData()["post"];
-
-
-
+        return new ViewModel();
     }
 
 }

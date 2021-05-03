@@ -12,11 +12,23 @@ namespace Golf\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use Golf\Model\PlayerTable;
 
 class GolfController extends AbstractActionController
 {
+    private $table;
+
+    public function __construct(PlayerTable $table)
+    {
+        $this->table = $table;
+    }
+
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel(
+            [
+                "players" => $this->table->fetchAll(),
+            ]
+        );
     }
 }

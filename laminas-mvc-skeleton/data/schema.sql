@@ -4,10 +4,3 @@ CREATE TABLE players
     FIRST_NAME VARCHAR(100),
     LAST_NAME  VARCHAR(100),
 );
-
-CREATE TABLE album
-(
-    id     INTEGER PRIMARY KEY AUTOINCREMENT,
-    artist varchar(100) NOT NULL,
-    title  varchar(100) NOT NULL
-);

@@ -14,7 +14,7 @@ use Golf\Controller\GolfController;
 use Golf\Controller\WriteController;
 use Golf\Factory\WriteControllerFactory;
 use Laminas\Router\Http\Literal;
-use Laminas\ServiceManager\Factory\InvokableFactory;
+//use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
@@ -41,22 +41,31 @@ return [
             ],
         ],
     ],
-    'controllers' => [
-        'factories' => [
-            GolfController::class => InvokableFactory::class,
-            WriteController::class => WriteControllerFactory::class,
+    "service_manager" => [
+        "aliases" => [
+            Model\PostCommandInterface::class => Model\PostCommand::class,
+        ],
+        "factories" => [
             Model\PostCommand::class => InvokableFactory::class,
-        ],
+        ]
     ],
+
+    'controllers' => [
+    'factories' => [
+//        GolfController::class => InvokableFactory::class,
+        WriteController::class => WriteControllerFactory::class,
+  //      Model\PostCommand::class => InvokableFactory::class,
+    ],
+],
     'view_manager' => [
-        'display_not_found_reason' => true,
-        'display_exceptions' => true,
-        'doctype' => 'HTML5',
-        'template_map' => [
-            'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
-        ],
-        'template_path_stack' => [
-            __DIR__ . '/../view',
-        ],
+    'display_not_found_reason' => true,
+    'display_exceptions' => true,
+    'doctype' => 'HTML5',
+    'template_map' => [
+        'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
     ],
+    'template_path_stack' => [
+        __DIR__ . '/../view',
+    ],
+],
 ];

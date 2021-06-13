@@ -1,0 +1,12 @@
+<?php
+
+$loopCounter = $this->partialLoop()->getPartialCounter();
+?>
+
+
+<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php
+echo $this->text; ?>" class="<?php
+echo ($loopCounter === 0) ? "active" : null; ?>"
+        aria-current="<?php
+        echo ($loopCounter === 0) ? "true" : null; ?>"></button>
+

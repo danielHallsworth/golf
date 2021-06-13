@@ -2,16 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Users;
+namespace User;
 
+use Application\Controller\IndexController;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use User\Controller\UserController;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
         'routes' => [
             'home' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/',
+                    'defaults' => [
+                        'controller' => IndexController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'user-home' => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/user',
@@ -33,11 +45,11 @@ return [
             ],
         ],
     ],
-//    'controllers' => [
-//        'factories' => [
-//            Controller\IndexController::class => InvokableFactory::class,
-//        ],
-//    ],
+    'controllers' => [
+        'factories' => [
+            UserController::class => InvokableFactory::class,
+        ],
+    ],
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -46,7 +58,7 @@ return [
         'exception_template'       => 'error/index',
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            'user/index/index' => __DIR__ . '/../view/user/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],

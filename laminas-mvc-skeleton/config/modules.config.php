@@ -21,5 +21,4 @@ return [
     'Laminas\Router',
     'Laminas\Validator',
     'Application',
-    "Golf",
 ];
